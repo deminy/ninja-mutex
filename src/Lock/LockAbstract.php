@@ -9,7 +9,7 @@
  */
 namespace NinjaMutex\Lock;
 
-use NinjaMutex\UnrecoverableMutexException;
+use Exception;
 
 /**
  * Abstract lock implementor
@@ -55,12 +55,9 @@ abstract class LockAbstract implements LockInterface
     public function __destruct()
     {
         foreach ($this->locks as $name => $v) {
-            $released = $this->releaseLock($name);
-            if (!$released) {
-                throw new UnrecoverableMutexException(sprintf(
-                    'Cannot release lock in __destruct(): %s',
-                    $name
-                ));
+            try {
+                $this->releaseLock($name);
+            } catch (Exception $e) {
             }
         }
     }

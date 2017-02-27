@@ -9,6 +9,7 @@
  */
 namespace NinjaMutex;
 
+use Exception;
 use NinjaMutex\Lock\LockInterface;
 
 /**
@@ -94,14 +95,11 @@ class Mutex
      */
     public function __destruct()
     {
-        while ($this->isAcquired()) {
-            $released = $this->releaseLock();
-            if (!$released) {
-                throw new UnrecoverableMutexException(sprintf(
-                    'Cannot release lock in Mutex __destruct(): %s',
-                    $this->name
-                ));
+        try {
+            if ($this->isAcquired()) {
+                $this->releaseLock();
             }
+        } catch (Exception $e) {
         }
     }
 
