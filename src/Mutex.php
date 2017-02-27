@@ -100,6 +100,7 @@ class Mutex
                 $this->releaseLock();
             }
         } catch (Exception $e) {
+            // Ignoring exceptions in destructor to not block shutdown.
         }
     }
 

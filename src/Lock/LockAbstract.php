@@ -58,6 +58,7 @@ abstract class LockAbstract implements LockInterface
             try {
                 $this->releaseLock($name);
             } catch (Exception $e) {
+                // Ignoring exceptions in destructor to not block shutdown.
             }
         }
     }
