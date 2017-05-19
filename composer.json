@@ -1,5 +1,5 @@
 {
-    "name": "arvenil/ninja-mutex",
+    "name": "deminy/ninja-mutex",
     "description": "Simple to use mutex implementation that can use flock, memcache, memcached, mysql or redis for locking",
     "homepage" : "https://github.com/arvenil/ninja-mutex",
     "keywords" : ["mutex", "lock", "locking", "flock", "memcache", "memcached", "mysql", "redis"],
@@ -33,6 +33,9 @@
         "ext-memcached": "*",
         "ext-pdo_mysql": "*",
         "ext-redis": "*"
+    },
+    "replace": {
+        "arvenil/ninja-mutex": "*"
     },
     "suggest" : {
         "predis/predis" : "Create mutex using Predis (client library for Redis)",
